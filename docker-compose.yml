@@ -1,0 +1,54 @@
+version: '3'
+services:
+  nodejs_app:
+    build:
+      context: ./nodejs_app
+    ports:
+      - "5555:5555"
+    volumes:
+      - ./nodejs_app:/usr/src/app
+      - ./logs:/tmp/log
+    depends_on:
+      - mongo
+      - internal_listener
+    env_file:
+      - ./nodejs_app/.env
+    networks:
+      - app-network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  internal_listener:
+    build:
+      context: ./internal-listener
+    ports:
+      - "8111:8111"
+    volumes:
+      - ./internal-listener:/usr/src/app
+      - ./logs:/tmp/log
+    networks:
+      - app-network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    command: /bin/sh -c "chmod 777 /tmp/log && python3 ./listener.py"
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+      - ./mongod.conf:/etc/mongod.conf
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: fakescript
+      MONGO_INITDB_ROOT_PASSWORD: FaKeScRiPTpAssWord
+    command: --config /etc/mongod.conf
+    networks:
+      - app-network
+
+volumes:
+  mongo_data:
+
+networks:
+  app-network:

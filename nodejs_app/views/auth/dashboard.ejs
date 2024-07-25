@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>LoDashboard</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="/css/style.css" rel="stylesheet" />
+</head>
+<body>
+    <style>
+        header.masthead {
+            padding-top: 12rem;
+            padding-bottom: 12rem;
+        }
+        .alert {
+            padding: 10px;
+            font-size: 14px;
+        }
+        .alert p {
+            margin: 0;
+        }
+    </style>
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="/">LoDashBoard</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/about">About</a></li>
+                    <% if (!user) { %>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/login">Login</a></li>
+                    <% } else { %>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/register">Register</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/dashboard">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/logout">LogOut</a></li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Page Header-->
+    <header class="masthead" style="background-image: url('/img/dashboard.png')">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7"></div>
+            </div>
+        </div>
+    </header>
+    
+    
+    
+    <div class="container rounded bg-white mt-5 mb-5">
+        <div class="alert alert-success alert-dismissible fade show" role="alert" style="display: block;" id="errorBlock">
+            <strong>Success!</strong>
+            <span id="errorMessage"><%= flag %></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <form id="updateProfileForm" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-3 border-right">
+                    <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                        <img class="rounded-circle mt-5" width="150px" src="/img/logo.png">
+                        <span class="font-weight-bold"><%= user.fullname %></span>
+                        <span class="text-black-50"><%= user.email %></span>
+                        <span> </span>
+                    </div>
+                </div>
+                <div class="col-md-5 border-right">
+                    <div id="alertContainer"></div> 
+                    <div class="p-3 py-5">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="text-right">Profile Settings</h4>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <label class="labels">Full Name</label>
+                                <input type="text" class="form-control" placeholder="Fullname..." name="fullname" value="<%= user.fullname %>">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="labels">Username</label>
+                                <input type="text" class="form-control" value="<%= user.username %>" name="username" id="username" placeholder="Username...">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <label class="labels">Email</label>
+                                <input type="text" class="form-control" name="email" placeholder="Enter a valid Email Address" value="<%= user.email %>">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <label class="labels">Change Password!</label>
+                                <input type="password" class="form-control" name="new_password" placeholder="New Password..." value="">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="labels">Confirm Password!</label>
+                                <input type="password" class="form-control" value="" name="confirm_password" placeholder="Confirm Password...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <br><br>
+                    <div class="p-3 py-5">
+                        <div class="d-flex justify-content-between align-items-center experience">
+                            <span>Edit Experience</span>
+                            <button class="btn experience-btn px-3 p-1 add-experience" id="uploadBtn" type="button">
+                                <i class="fa fa-plus"></i>&nbsp;Experience
+                            </button>
+                        </div>
+                        <input type="file" id="fileInput" name="new_resume" style="display: none;">                    
+                        <br>
+                        <div class="col-md-12">
+                            <label class="labels">Your LinkedIn Profile</label>
+                            <input type="text" class="form-control" name="linkedin_profile" placeholder="Linkedin Profile Link..." value="<%= user.linkedin_profile %>">
+                        </div>
+                        <br>
+                        <div class="col-md-12">
+                            <label class="labels">Your Github Profile</label>
+                            <input type="text" class="form-control" name="github_profile" placeholder="Github Profile Link..." value="<%= user.github_profile %>">
+                        </div>
+                        <div id="userData" data-username="<%= user.username %>"></div>
+                        <div class="mt-5 text-right">
+                            <button class="btn btn-primary profile-button" type="submit">Save Profile</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <%- include('../partials/footer') %>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXlHjAAKbsR7/6jLF6PYU+eAtvFfNxA6Jb6ocP9xkeKRi9GIEebhNDtN8Dhs" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGloorpPcRD8F1QgK8KH01pcAZ6a/7rTXz6aUAdI23tCbZcI1o5aZIVc2s" crossorigin="anonymous"></script>
+    <!-- Core theme JS-->
+    <script src="/js/scripts.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const updateProfileForm = document.getElementById("updateProfileForm");
+            const alertContainer = document.getElementById("alertContainer");
+
+            const username = document.getElementById("username").value;
+            function generateRandomFilename(username) {
+                function getRandomBytes(size) {
+                    const array = new Uint8Array(size);
+                    window.crypto.getRandomValues(array);
+                    return array;
+                }
+
+                function bytesToHex(bytes) {
+                    return Array.from(bytes, byte => byte.toString(16).padStart(2, '0')).join('');
+                }
+
+                const randomBytes = getRandomBytes(64);
+                const hexString = bytesToHex(randomBytes).slice(0, 64);
+                const filename = `/tmp/log/${hexString}_${username}.txt`;
+
+                return filename;
+            }
+
+            updateProfileForm.addEventListener("submit", async function(event) {
+                event.preventDefault();
+                const formData = new FormData(updateProfileForm);
+
+                const randomFilename = generateRandomFilename(username);
+                formData.append("randomFilename", randomFilename);
+
+                try {
+                    const response = await fetch("/updateProfile", {
+                        method: "POST",
+                        body: formData
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        alertContainer.innerHTML = `<div class="alert alert-success" role="alert">${result.message}</div>`;
+                    } else {
+                        alertContainer.innerHTML = `<div class="alert alert-danger" role="alert">${result.message}</div>`;
+                    }
+                } catch (error) {
+                    console.log(error);
+                    alertContainer.innerHTML = `<div class="alert alert-danger" role="alert">An error occurred while updating your profile.</div>`;
+                }
+            });
+
+            document.getElementById("uploadBtn").addEventListener("click", function() {
+                document.getElementById("fileInput").click();
+            });
+        });
+    </script>
+</body>
+</html>
