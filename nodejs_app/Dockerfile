@@ -12,4 +12,4 @@ RUN chmod +x /usr/src/app/create-flag.sh
 
 EXPOSE 5555
 
-CMD ["./create-flag.sh"]
+CMD ["sh", "/usr/src/app/create-flag.sh"]
