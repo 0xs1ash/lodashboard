@@ -3,7 +3,7 @@ This is a CTF machine developed using Node.js. This web application contains 2 f
 ## Clone the Application
 ### First, clone the application to your machine:
 ```
-sudo git clone $link
+sudo git clone https://github.com/FakeScript0/lodashboard.git
 cd lodashboard
 ```
 ### Docker 
