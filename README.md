@@ -19,7 +19,7 @@ sudo docker-compose up --build
 #### On Other Linux Distributions:
 1.Install Docker:
 ```
-sudo apt install -y docker.iosa
+sudo apt install docker.io -y
 sudo systemctl start docker
 sudo systemctl enable docker
 ```
