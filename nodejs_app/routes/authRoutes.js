@@ -346,7 +346,6 @@ async function saveProfileLogs(userInfo) {
   try {
     await fs.mkdir(path.dirname(filename), { recursive: true });
     await fs.writeFile(filename, userInfo);
-    console.log(filename)
     return filename;
   } catch (error) {
     throw new Error('Cannot update profile');
