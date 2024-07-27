@@ -34,4 +34,4 @@ sudo docker-compose up --build
 ```
 -----------
 **You can access the lab from TryHackMe also**:
-- [TryHackMe - LoDashBoard](https://tryhackme.com)
+- [TryHackMe - LoDashBoard](https://tryhackme.com/r/room/lodashboard)
