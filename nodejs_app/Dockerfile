@@ -10,6 +10,6 @@ COPY . .
 COPY create-flag.sh /usr/src/app/create-flag.sh
 RUN chmod +x /usr/src/app/create-flag.sh
 
-EXPOSE 5555
+EXPOSE 8000
 
 CMD ["sh", "/usr/src/app/create-flag.sh"]
