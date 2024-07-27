@@ -4,7 +4,7 @@ services:
     build:
       context: ./nodejs_app
     ports:
-      - "5555:5555"
+      - "8000:8000"
     volumes:
       - ./nodejs_app:/usr/src/app
       - ./logs:/tmp/log
